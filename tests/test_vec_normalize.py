@@ -17,6 +17,8 @@ from stable_baselines3.common.vec_env import (
     unwrap_vec_normalize,
 )
 
+from stable_baselines3.common.env_util import GoalEnv
+
 ENV_ID = "Pendulum-v1"
 
 
@@ -41,7 +43,7 @@ class DummyRewardEnv(gym.Env):
         return np.array([self.returned_rewards[self.return_reward_idx]])
 
 
-class DummyDictEnv(gym.GoalEnv):
+class DummyDictEnv(GoalEnv):
     """
     Dummy gym goal env for testing purposes
     """

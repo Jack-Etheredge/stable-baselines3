@@ -8,6 +8,7 @@ from gym import spaces
 from stable_baselines3.common.preprocessing import is_image_space_channels_first
 from stable_baselines3.common.vec_env import DummyVecEnv, VecCheckNan
 
+from stable_baselines3.common.env_util import GoalEnv
 
 def _is_numpy_array_space(space: spaces.Space) -> bool:
     """
@@ -176,7 +177,7 @@ def _check_returned_values(env: gym.Env, observation_space: spaces.Space, action
     assert isinstance(done, bool), "The `done` signal must be a boolean"
     assert isinstance(info, dict), "The `info` returned by `step()` must be a python dictionary"
 
-    if isinstance(env, gym.GoalEnv):
+    if isinstance(env, GoalEnv):
         # For a GoalEnv, the keys are checked at reset
         assert reward == env.compute_reward(obs["achieved_goal"], obs["desired_goal"], info)
 
